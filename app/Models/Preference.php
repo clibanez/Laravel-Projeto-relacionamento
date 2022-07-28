@@ -14,6 +14,7 @@ class Preference extends Model
            'background_color',
     ];
 
+    //relacionamento inverso com a Model User
     public function user(){
         return $this->belongsTo(User::class);
     }

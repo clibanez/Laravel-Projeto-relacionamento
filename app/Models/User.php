@@ -42,8 +42,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    //Relacionamento OneToOne com a Model Preference
     public function preference(){
-
         return $this->hasOne(Preference::class);
     }
 }

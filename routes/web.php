@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Preference;
+use App\Models\Course;
+use App\Models\Module;
+use App\Models\Lesson;
 
 
 /*
@@ -27,9 +30,9 @@ Route::get('One-To-One', function() {
    ];
 
    if($user->preference){
-       $user->preference->update($data);  //Metodo update caso tenha uma preferencia
+       $user->preference->update($data);  //Metodo update(); caso tenha uma preferencia
    }else{
-       //$user->preference()->create($data);   //Podemos usar o metodo create
+       //$user->preference()->create($data);   //Podemos usar o metodo create();
 
        $preference = new Preference($data);  //Podemos instanciar um objeto e usar o metodo save();
        $user->preference()->save($preference);
@@ -37,4 +40,22 @@ Route::get('One-To-One', function() {
    $user->refresh();
    $user->preference->delete();  //deletando as preferencias do usuário
    dd($user->preference);
+});
+
+Route::get('One-To-Many', function(){
+  //$course = Course::create(['name' => 'Desenvolvimento','avaliable' => 1 ]); //Criando um Course
+  $course = Course::first(); //pegando o primeiro course
+  $data = [
+      'name' => 'Módule x1'
+  ];//similando os dados que vem da request
+
+  $course->modules()->create($data);
+
+
+  //$course->modules->get(); //Lembrando aqu usando esse metodo ele traz todos os modulos do curso.
+  $module = $course->modules;
+
+
+  dd($module);
+
 });
