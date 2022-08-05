@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Permission;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -46,4 +47,8 @@ class User extends Authenticatable
     public function preference(){
         return $this->hasOne(Preference::class);
     }
+
+    public function permissions(){
+        return $this->belongsToMany(Permission::class);
+   }
 }
